@@ -20,7 +20,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import com.startapp.android.publish.StartAppSDK;
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -45,19 +46,18 @@ public class MyActivity extends Activity {
     SharedPreferences Megatokyo_data;
     public static String filename = "first";
     public static String filename1 = "second";
-
+    private AdView adView;
     private LruCache<String, Bitmap> mMemoryCache;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Megatokyo_data = getSharedPreferences("Latest", 0);
         super.onCreate(savedInstanceState);
-        StartAppSDK.init(this, "107171153", "207061844", true);
         setContentView(R.layout.main);
         loadFirstComic();
         buttonlistener();
         beginService();
-
-
+        AdView adView = (AdView)this.findViewById(R.id.adView);
+        adView.loadAd(new AdRequest());
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
         // Use 1/8th of the available memory for this memory cache.
         final int cacheSize = maxMemory / 8;

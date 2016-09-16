@@ -16,13 +16,13 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/pic"
                     android:layout_weight="1"
             >
         <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageView"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
@@ -31,11 +31,13 @@
 
 
     </RelativeLayout>
-    <com.startapp.android.publish.banner.Banner
-            android:id="@+id/startAppBanner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"/>
+    <com.google.ads.AdView android:id="@+id/adView"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           ads:adUnitId="a152dae94cc79f2"
+                           ads:adSize="BANNER"
+
+                           android:layout_centerHorizontal="true"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="fill_parent"

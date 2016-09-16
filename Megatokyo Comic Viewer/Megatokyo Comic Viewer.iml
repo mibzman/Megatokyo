@@ -18,6 +18,8 @@
     <orderEntry type="library" name="library-1.2.2" level="project" />
     <orderEntry type="library" name="GoogleAdMobAdsSdk-6.4.1" level="project" />
     <orderEntry type="library" name="jsoup-1.7.3" level="project" />
+    <orderEntry type="library" name="android-support-v4" level="project" />
+    <orderEntry type="library" name="android-support-v13" level="project" />
   </component>
 </module>
 

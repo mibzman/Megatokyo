@@ -4,6 +4,7 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
+              android:screenOrientation="portrait"
         >
     <TextView
             android:layout_width="wrap_content"
@@ -20,9 +21,13 @@
                     android:layout_weight="1"
             >
         <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView" android:layout_gravity="center_horizontal"/>
+                android:id="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"/>
 
 
     </RelativeLayout>
@@ -31,7 +36,8 @@
                            android:layout_height="wrap_content"
                            ads:adUnitId="a152dae94cc79f2"
                            ads:adSize="BANNER"
-                           ads:loadAdOnCreate="true"/>
+
+                           android:layout_centerHorizontal="true"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="fill_parent"

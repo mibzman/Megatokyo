@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=" "
+            android:id="@+id/textView"
+            android:layout_centerHorizontal="true" android:layout_gravity="center_horizontal"/>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pic"
+                    android:layout_weight="1"
+            >
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView" android:layout_gravity="center_horizontal"/>
+
+
+    </RelativeLayout>
+    <com.google.ads.AdView android:id="@+id/adView"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           ads:adUnitId="a152dae94cc79f2"
+                           ads:adSize="BANNER"
+                           ads:loadAdOnCreate="true"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pic"
+            >
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/first"
+                android:id="@+id/first"
+                android:layout_weight=".2"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prev"
+                android:id="@+id/prev"
+                android:layout_alignParentTop="true" android:layout_toRightOf="@+id/first"
+                android:layout_weight=".2"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rand"
+                android:id="@+id/rand"
+                android:layout_alignParentTop="true" android:layout_toRightOf="@+id/prev"
+                android:layout_weight=".2"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/next"
+                android:id="@+id/next"
+                android:layout_alignParentTop="true" android:layout_toRightOf="@+id/rand"
+                android:layout_weight=".2"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/last"
+                android:id="@+id/last"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/next"
+                android:layout_weight=".2"/>
+    </LinearLayout>
+</LinearLayout>
+

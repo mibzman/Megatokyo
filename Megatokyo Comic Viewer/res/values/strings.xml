@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Megatokyo Comic Viewer</string>
+    <string name="about_page">About</string>
+    <string name="first">First</string>
+    <string name="prev">Prev</string>
+    <string name="rand">Rand</string>
+    <string name="next">Next</string>
+    <string name="last">Last</string>
+</resources>

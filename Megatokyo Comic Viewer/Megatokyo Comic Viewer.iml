@@ -20,6 +20,7 @@
     <orderEntry type="library" name="jsoup-1.7.3" level="project" />
     <orderEntry type="library" name="android-support-v4" level="project" />
     <orderEntry type="library" name="android-support-v13" level="project" />
+    <orderEntry type="library" name="StartAppInApp-2.4.1" level="project" />
   </component>
 </module>
 

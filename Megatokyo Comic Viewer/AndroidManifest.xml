@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.isotope.Megatokyo_Comic_Viewer"
-          android:versionCode="3"
-          android:versionName="1.2">
+          android:versionCode="4"
+          android:versionName="1.3">
     <uses-sdk android:minSdkVersion="7"/>
     <application
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -44,11 +44,13 @@
         </activity>
         <activity android:name="com.google.ads.AdActivity"
                   android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
-
-
+        <service android:name=".TheService"
+                 android:enabled="true" />
+        <receiver android:name=".MyReceiver"/>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 </manifest>

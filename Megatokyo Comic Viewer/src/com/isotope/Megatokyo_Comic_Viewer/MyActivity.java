@@ -1,8 +1,6 @@
 package com.isotope.Megatokyo_Comic_Viewer;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
+import android.app.*;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,8 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
+import com.startapp.android.publish.StartAppSDK;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -34,6 +31,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.Random;
 
 
@@ -47,13 +45,56 @@ public class MyActivity extends Activity {
     SharedPreferences Megatokyo_data;
     public static String filename = "first";
     public static String filename1 = "second";
-    private AdView adView;
+
     private LruCache<String, Bitmap> mMemoryCache;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Megatokyo_data = getSharedPreferences("Latest", 0);
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, "107171153", "207061844", true);
         setContentView(R.layout.main);
+        loadFirstComic();
+        buttonlistener();
+        beginService();
+
+
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+        // Use 1/8th of the available memory for this memory cache.
+        final int cacheSize = maxMemory / 8;
+        mMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
+            @Override
+            protected int sizeOf(String key, Bitmap bitmap) {
+                // The cache size will be measured in kilobytes rather than
+                // number of items.
+                return  (bitmap.getRowBytes() * bitmap.getHeight()) / 1024;
+            }
+        };
+    }
+    public void beginService() {
+       if (Servicecheck()) {
+           Calendar cal = Calendar.getInstance();
+           Intent intent = new Intent(this, TheService.class);
+           PendingIntent pintent = PendingIntent.getService(this, 0, intent, 0);
+           AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+// Start every 30 seconds
+           alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1200 * 1000, pintent);
+       } else {
+           //do Nothing!!!!!!!!!~!
+       }
+    }
+    public boolean Servicecheck(){
+        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE))
+        {
+            if ("com.isotope.Megatokyo_Comic_Viewer.TheService"
+                    .equals(service.service.getClassName()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void loadFirstComic() {
         if (checkNet()){
             try{
                 Document doc = Jsoup.connect("http://megatokyo.com/").get();
@@ -62,7 +103,7 @@ public class MyActivity extends Activity {
                 Element image = mySpan.child(0);
                 final String cakeString= image.attr("src");
                 if (cakeString.length() > 0){
-                   // Toast.makeText(getApplicationContext(), "off", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(), "off", Toast.LENGTH_SHORT).show();
                 }
                 String shortenedString = cakeString.substring(7,11);
                 currentcomic = Integer.parseInt(shortenedString);
@@ -86,26 +127,8 @@ public class MyActivity extends Activity {
         }else{
             nopeNet();
         }
-        buttonlistener();
-        AdView adView = (AdView)this.findViewById(R.id.adView);
-        adView.loadAd(new AdRequest());
-        // Get max available VM memory, exceeding this amount will throw an
-        // OutOfMemory exception. Stored in kilobytes as LruCache takes an
-        // int in its constructor.
-        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-
-        // Use 1/8th of the available memory for this memory cache.
-        final int cacheSize = maxMemory / 8;
-
-        mMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
-            @Override
-            protected int sizeOf(String key, Bitmap bitmap) {
-                // The cache size will be measured in kilobytes rather than
-                // number of items.
-                return  (bitmap.getRowBytes() * bitmap.getHeight()) / 1024;
-            }
-        };
     }
+
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
